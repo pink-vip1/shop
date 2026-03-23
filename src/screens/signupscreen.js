@@ -1,3 +1,4 @@
+// File: src/screens/SignUpScreen.js
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -13,9 +14,11 @@ export default function SignUpScreen({ navigation }) {
           <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2909/2909808.png' }} style={styles.logo} />
         </View>
 
-        <Text style={styles.title}>Sign Up</Text>
+        {/* Tiêu đề "Sing up" */}
+        <Text style={styles.title}>Sing up</Text>
         <Text style={styles.subtitle}>Enter your credentials to continue</Text>
 
+        {/* Form nhập liệu */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Username</Text>
           <TextInput style={styles.input} placeholder="Afsar Hossen Shuvo" placeholderTextColor="#1A1A1A" />
@@ -23,10 +26,7 @@ export default function SignUpScreen({ navigation }) {
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Email</Text>
-          <View style={styles.inputRow}>
-            <TextInput style={[styles.input, { flex: 1, borderBottomWidth: 0 }]} placeholder="imshuvo97@gmail.com" placeholderTextColor="#1A1A1A" />
-            <Ionicons name="checkmark" size={24} color="#53B175" />
-          </View>
+          <TextInput style={styles.input} placeholder="imshuvo97@gmail.com" placeholderTextColor="#1A1A1A" keyboardType="email-address" />
         </View>
 
         <View style={styles.inputContainer}>
@@ -39,6 +39,7 @@ export default function SignUpScreen({ navigation }) {
           </View>
         </View>
 
+        {/* Đoạn text Điều khoản */}
         <View style={styles.termsContainer}>
           <Text style={styles.termsText}>By continuing you agree to our </Text>
           <Text style={styles.termsLink}>Terms of Service</Text>
@@ -46,14 +47,16 @@ export default function SignUpScreen({ navigation }) {
           <Text style={styles.termsLink}>Privacy Policy.</Text>
         </View>
 
+        {/* Nút "Sing Up" màu xanh lá */}
         <TouchableOpacity style={styles.signupBtn}>
-          <Text style={styles.signupBtnText}>Sign Up</Text>
+          <Text style={styles.signupBtnText}>Sing Up</Text>
         </TouchableOpacity>
 
+        {/* Chữ "Singin" ở cuối */}
         <View style={styles.loginRow}>
           <Text style={styles.loginText}>Already have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.loginLink}>Signup</Text> {/* Chữ trong ảnh gốc viết là Signup, có thể đổi thành Login */}
+            <Text style={styles.loginLink}>Singin</Text>
           </TouchableOpacity>
         </View>
 
@@ -63,8 +66,8 @@ export default function SignUpScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FCFCFC' },
-  content: { paddingHorizontal: 25, paddingTop: 30, paddingBottom: 40 },
+  container: { flex: 1, backgroundColor: '#FFF' },
+  content: { paddingHorizontal: 25, paddingTop: 30 },
   logoContainer: { alignItems: 'center', marginBottom: 50 },
   logo: { width: 50, height: 50 },
   title: { fontSize: 26, fontWeight: 'bold', color: '#1A1A1A', marginBottom: 10 },
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
   termsLink: { fontSize: 14, color: '#53B175', fontWeight: '500', lineHeight: 22 },
   signupBtn: { backgroundColor: '#53B175', width: '100%', paddingVertical: 18, borderRadius: 15, alignItems: 'center', marginBottom: 20 },
   signupBtnText: { color: '#FFF', fontSize: 18, fontWeight: 'bold' },
-  loginRow: { flexDirection: 'row', justifyContent: 'center' },
+  loginRow: { flexDirection: 'row', justifyContent: 'center', marginBottom: 30 },
   loginText: { fontSize: 14, color: '#1A1A1A', fontWeight: '500' },
   loginLink: { fontSize: 14, color: '#53B175', fontWeight: 'bold' }
 });

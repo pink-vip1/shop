@@ -1,3 +1,4 @@
+// File: src/screens/LoginScreen.js
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -9,14 +10,16 @@ export default function LoginScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+        
+        {/* Logo củ cà rốt màu xanh ở giữa */}
         <View style={styles.logoContainer}>
-          {/* Logo Carrot */}
           <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2909/2909808.png' }} style={styles.logo} />
         </View>
 
-        <Text style={styles.title}>Login</Text>
-        <Text style={styles.subtitle}>Enter your emails and password</Text>
-
+        {/* Tiêu đề "Loging" (viết sai y hệt trong ảnh thiết kế) */}
+        <Text style={styles.title}>Loging</Text>
+        
+        {/* Form nhập liệu */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Email</Text>
           <TextInput 
@@ -46,17 +49,16 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.forgotPassText}>Forgot Password?</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
-          style={styles.loginBtn}
-          onPress={() => navigation.navigate('Home')} // Tạm trỏ tới Home
-        >
+        {/* Nút Log In màu xanh lá */}
+        <TouchableOpacity style={styles.loginBtn}>
           <Text style={styles.loginBtnText}>Log In</Text>
         </TouchableOpacity>
 
+        {/* Chữ "Singup" */}
         <View style={styles.signupRow}>
           <Text style={styles.signupText}>Don't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text style={styles.signupLink}>Signup</Text>
+            <Text style={styles.signupLink}>Singup</Text>
           </TouchableOpacity>
         </View>
 
@@ -66,12 +68,11 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FCFCFC' },
+  container: { flex: 1, backgroundColor: '#FFF' },
   content: { paddingHorizontal: 25, paddingTop: 30 },
   logoContainer: { alignItems: 'center', marginBottom: 50 },
   logo: { width: 50, height: 50 },
-  title: { fontSize: 26, fontWeight: 'bold', color: '#1A1A1A', marginBottom: 10 },
-  subtitle: { fontSize: 16, color: '#7C7C7C', marginBottom: 40 },
+  title: { fontSize: 26, fontWeight: 'bold', color: '#1A1A1A', marginBottom: 40 },
   inputContainer: { marginBottom: 30 },
   label: { fontSize: 16, color: '#7C7C7C', marginBottom: 10, fontWeight: '500' },
   input: { fontSize: 18, color: '#1A1A1A', borderBottomWidth: 1, borderBottomColor: '#E2E2E2', paddingBottom: 10 },
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
   forgotPassText: { color: '#1A1A1A', fontSize: 14, fontWeight: '500' },
   loginBtn: { backgroundColor: '#53B175', width: '100%', paddingVertical: 18, borderRadius: 15, alignItems: 'center', marginBottom: 20 },
   loginBtnText: { color: '#FFF', fontSize: 18, fontWeight: 'bold' },
-  signupRow: { flexDirection: 'row', justifyContent: 'center' },
+  signupRow: { flexDirection: 'row', justifyContent: 'center', marginBottom: 30 },
   signupText: { fontSize: 14, color: '#1A1A1A', fontWeight: '500' },
   signupLink: { fontSize: 14, color: '#53B175', fontWeight: 'bold' }
 });

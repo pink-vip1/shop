@@ -1,113 +1,50 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-// Dùng icon của Expo vector-icons
-import { MaterialIcons, Ionicons, FontAwesome } from '@expo/vector-icons'; 
+import { FontAwesome } from '@expo/vector-icons';
 
-export default function SignInScreen() {
-  // State để ẩn/hiện mật khẩu
-  const [secureText, setSecureText] = useState(true);
-
+export default function SignInScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-        
-        {/* 1. Ảnh minh họa Sign In */}
-        <Image 
-          source={require('../../assets/anh2.png')} 
-          style={styles.image}
-          resizeMode="contain"
-        />
+      <Image source={require('../../assets/anh2.jpg')} style={styles.image} resizeMode="cover" />
+      
+      <View style={styles.content}>
+        <Text style={styles.title}>Get your groceries{'\n'}with nectar</Text>
 
-        {/* 2. Tiêu đề - Canh trái giống thiết kế */}
-        <View style={styles.headerContainer}>
-          <Text style={styles.title}>SIGN IN</Text>
+        <TouchableOpacity style={styles.phoneInput} onPress={() => navigation.navigate('Number')}>
+          <Text style={styles.flag}>🇧🇩 +880</Text>
+          <Text style={styles.placeholder}>Enter your mobile number</Text>
+        </TouchableOpacity>
+
+        <View style={styles.dividerContainer}>
+          <Text style={styles.orText}>Or connect with social media</Text>
         </View>
 
-        {/* 3. Các ô nhập liệu (Input Fields) */}
-        <View style={styles.form}>
-          {/* Ô Email - Có icon thư */}
-          <View style={styles.inputContainer}>
-            <MaterialIcons name="mail-outline" size={24} color="#A0A0A0" style={styles.inputIcon} />
-            <TextInput 
-              placeholder="Email" 
-              placeholderTextColor="#A0A0A0" 
-              style={styles.input}
-              keyboardType="email-address"
-            />
-          </View>
+        <TouchableOpacity style={[styles.socialBtn, { backgroundColor: '#5383EC' }]}>
+          <FontAwesome name="google" size={24} color="#FFF" style={styles.icon} />
+          <Text style={styles.socialText}>Continue with Google</Text>
+        </TouchableOpacity>
 
-          {/* Ô Password - Có icon khóa và icon mắt ẩn/hiện */}
-          <View style={styles.inputContainer}>
-            <Ionicons name="lock-closed-outline" size={24} color="#A0A0A0" style={styles.inputIcon} />
-            <TextInput 
-              placeholder="Password" 
-              placeholderTextColor="#A0A0A0" 
-              style={styles.input}
-              secureTextEntry={secureText} // Trạng thái ẩn/hiện
-            />
-            <TouchableOpacity onPress={() => setSecureText(!secureText)}>
-              <Ionicons name={secureText ? "eye-outline" : "eye-off-outline"} size={24} color="#A0A0A0" />
-            </TouchableOpacity>
-          </View>
-
-          {/* Quên mật khẩu - Canh phải */}
-          <TouchableOpacity style={styles.forgotPassword}>
-            <Text style={styles.forgotText}>Forgot Password?</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* 4. Nút Sign In và các lựa chọn khác */}
-        <View style={styles.actionContainer}>
-          <TouchableOpacity style={styles.signInButton}>
-            <Text style={styles.signInText}>Sign In</Text>
-          </TouchableOpacity>
-
-          <Text style={styles.orText}>Or sign in with</Text>
-
-          {/* Các nút mạng xã hội - Bo tròn màu xanh giống thiết kế */}
-          <View style={styles.socialContainer}>
-            <TouchableOpacity style={styles.socialButton}>
-              <FontAwesome name="google" size={24} color="#4285F4" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.socialButton}>
-              <FontAwesome name="facebook" size={24} color="#3B5998" />
-            </TouchableOpacity>
-          </View>
-
-          {/* Dòng chữ Đăng ký ở cuối */}
-          <View style={styles.signUpContainer}>
-            <Text style={styles.noAccountText}>Don't have an account? </Text>
-            <TouchableOpacity>
-              <Text style={styles.signUpText}>Sign Up</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-      </ScrollView>
+        <TouchableOpacity style={[styles.socialBtn, { backgroundColor: '#4A66AC' }]}>
+          <FontAwesome name="facebook" size={24} color="#FFF" style={styles.icon} />
+          <Text style={styles.socialText}>Continue with Facebook</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
-  scrollContent: { paddingBottom: 30 },
-  image: { width: '100%', height: 220, marginTop: 20, marginBottom: 30 },
-  headerContainer: { paddingHorizontal: 30, alignItems: 'flex-start', marginBottom: 30 },
-  title: { fontSize: 28, fontWeight: 'bold', color: '#1A1A1A' },
-  form: { paddingHorizontal: 30, marginBottom: 30 },
-  inputContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#F5F5F5', borderRadius: 15, paddingHorizontal: 20, paddingVertical: 18, marginBottom: 20 },
-  inputIcon: { marginRight: 15 },
-  input: { flex: 1, fontSize: 16, color: '#1A1A1A' },
-  forgotPassword: { alignItems: 'flex-end', marginTop: 5 },
-  forgotText: { fontSize: 14, color: '#A0A0A0', fontWeight: '500' },
-  actionContainer: { paddingHorizontal: 30, alignItems: 'center' },
-  signInButton: { backgroundColor: '#FF6B6B', width: '100%', paddingVertical: 18, borderRadius: 15, alignItems: 'center', marginBottom: 25 },
-  signInText: { color: '#FFF', fontSize: 18, fontWeight: 'bold' },
-  orText: { fontSize: 14, color: '#A0A0A0', marginBottom: 20 },
-  socialContainer: { flexDirection: 'row', marginBottom: 30 },
-  socialButton: { width: 60, height: 60, borderRadius: 30, backgroundColor: '#FFF', justifyContent: 'center', alignItems: 'center', marginHorizontal: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 5, elevation: 3 },
-  signUpContainer: { flexDirection: 'row', alignItems: 'center' },
-  noAccountText: { fontSize: 15, color: '#666' },
-  signUpText: { fontSize: 15, color: '#FF6B6B', fontWeight: 'bold' }
+  container: { flex: 1, backgroundColor: '#FCFCFC' },
+  image: { width: '100%', height: '40%' },
+  content: { flex: 1, paddingHorizontal: 25, paddingTop: 20 },
+  title: { fontSize: 26, fontWeight: 'bold', color: '#1A1A1A', marginBottom: 30, lineHeight: 35 },
+  phoneInput: { flexDirection: 'row', alignItems: 'center', borderBottomWidth: 1, borderBottomColor: '#E2E2E2', paddingBottom: 10, marginBottom: 35 },
+  flag: { fontSize: 18, marginRight: 15 },
+  placeholder: { fontSize: 16, color: '#A0A0A0' },
+  dividerContainer: { alignItems: 'center', marginBottom: 35 },
+  orText: { color: '#7C7C7C', fontSize: 14, fontWeight: '500' },
+  socialBtn: { flexDirection: 'row', alignItems: 'center', paddingVertical: 18, borderRadius: 15, marginBottom: 20, paddingHorizontal: 30 },
+  icon: { marginRight: 20, width: 25, textAlign: 'center' },
+  socialText: { color: '#FFF', fontSize: 18, fontWeight: '600', flex: 1, textAlign: 'center', paddingRight: 45 }
 });
