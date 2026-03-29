@@ -8,12 +8,13 @@ export default function WelcomeScreen({ navigation }) {
       style={styles.background}
       resizeMode="cover"
     >
-      {/* Lớp overlay đã được nâng cấp để phủ đen mờ toàn màn hình */}
       <View style={styles.overlay}>
+        
         <Image 
-            source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2909/2909808.png' }} 
-            style={styles.carrot} 
-          />
+          source={require('../../assets/crot.png') } 
+          style={styles.carrot} 
+        />  
+        
         <Text style={styles.title}>Welcome</Text>
         <Text style={styles.title}>to our store</Text>
         <Text style={styles.subtitle}>Get your groceries in as fast as one hour</Text>
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
   },
   overlay: { 
     flex: 1, 
-    backgroundColor: 'rgba(0,0,0,0.4)', // Thêm dòng này: Phủ lớp đen mờ 40%
+    backgroundColor: 'rgba(0,0,0,0.4)', // Phủ lớp đen mờ 40%
     justifyContent: 'flex-end', 
     alignItems: 'center',
     paddingHorizontal: 30, 
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     width: 48, 
     height: 48, 
     marginBottom: 15, 
-    tintColor: '#FFF' 
+    tintColor: '#FFF' // Ép icon thành màu trắng tinh
   },
   title: { 
     fontSize: 42, 
@@ -54,7 +55,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 48 
   },
-
   subtitle: { 
     fontSize: 16, 
     color: 'rgba(255,255,255,0.85)', 

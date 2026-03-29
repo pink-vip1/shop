@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 // Import 2 màn hình đầu tiên (Onboarding và Sign In)
 import WelcomeScreen from '../screens/welcomescreen';
 import SignInScreen from '../screens/signinscreen';
+import HomeScreen from '../screens/homescreen';
 
 // Import 5 màn hình tiếp theo
 import NumberScreen from '../screens/numberscreen';
@@ -26,11 +27,12 @@ export default function AppNavigator() {
       <Stack.Screen name="SignIn" component={SignInScreen} />
       
       {/* 5 màn hình sau */}
-      <Stack.Screen name="Number" component={NumberScreen} />
-      <Stack.Screen name="Verification" component={VerificationScreen} />
-      <Stack.Screen name="SelectLocation" component={SelectLocationScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen name="Number" component={numberscreen} />
+      <Stack.Screen name="Verification" component={verificationscreen} />
+      <Stack.Screen name="SelectLocation" component={locationscreen} />
+      <Stack.Screen name="Login" component={loginscreen} />
+      <Stack.Screen name="SignUp" component={signupscreen} />
+      <Stack.Screen name="Home" component={homescreen} />
     </Stack.Navigator>
   );
 }

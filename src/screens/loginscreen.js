@@ -1,4 +1,3 @@
-// File: src/screens/LoginScreen.js
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,15 +10,17 @@ export default function LoginScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         
-        {/* Logo củ cà rốt màu xanh ở giữa */}
         <View style={styles.logoContainer}>
-          <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2909/2909808.png' }} style={styles.logo} />
+            <Image 
+               source={require('../../assets/crot.png') } 
+              style={styles.carrot} 
+              resizeMode="contain" 
+            />  
         </View>
 
-        {/* Tiêu đề "Loging" (viết sai y hệt trong ảnh thiết kế) */}
         <Text style={styles.title}>Loging</Text>
-        
-        {/* Form nhập liệu */}
+        <Text style={styles.subtitle}>Enter your emails and password</Text>
+
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Email</Text>
           <TextInput 
@@ -49,12 +50,13 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.forgotPassText}>Forgot Password?</Text>
         </TouchableOpacity>
 
-        {/* Nút Log In màu xanh lá */}
-        <TouchableOpacity style={styles.loginBtn}>
+       <TouchableOpacity 
+          style={styles.loginBtn}
+          onPress={() => navigation.navigate('Home')} 
+        >
           <Text style={styles.loginBtnText}>Log In</Text>
         </TouchableOpacity>
 
-        {/* Chữ "Singup" */}
         <View style={styles.signupRow}>
           <Text style={styles.signupText}>Don't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
@@ -71,8 +73,9 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFF' },
   content: { paddingHorizontal: 25, paddingTop: 30 },
   logoContainer: { alignItems: 'center', marginBottom: 50 },
-  logo: { width: 50, height: 50 },
-  title: { fontSize: 26, fontWeight: 'bold', color: '#1A1A1A', marginBottom: 40 },
+  logo: { width: 55, height: 55 },
+  title: { fontSize: 26, fontWeight: 'bold', color: '#1A1A1A', marginBottom: 10 },
+  subtitle: { fontSize: 16, color: '#7C7C7C', marginBottom: 40 },
   inputContainer: { marginBottom: 30 },
   label: { fontSize: 16, color: '#7C7C7C', marginBottom: 10, fontWeight: '500' },
   input: { fontSize: 18, color: '#1A1A1A', borderBottomWidth: 1, borderBottomColor: '#E2E2E2', paddingBottom: 10 },

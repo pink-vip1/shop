@@ -1,4 +1,3 @@
-// File: src/screens/SignUpScreen.js
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -10,15 +9,18 @@ export default function SignUpScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+        
         <View style={styles.logoContainer}>
-          <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2909/2909808.png' }} style={styles.logo} />
+            <Image 
+          source={require('../../assets/crot.png') } 
+          style={styles.carrot} 
+           
+        />  
         </View>
 
-        {/* Tiêu đề "Sing up" */}
         <Text style={styles.title}>Sing up</Text>
         <Text style={styles.subtitle}>Enter your credentials to continue</Text>
 
-        {/* Form nhập liệu */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Username</Text>
           <TextInput style={styles.input} placeholder="Afsar Hossen Shuvo" placeholderTextColor="#1A1A1A" />
@@ -26,7 +28,10 @@ export default function SignUpScreen({ navigation }) {
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Email</Text>
-          <TextInput style={styles.input} placeholder="imshuvo97@gmail.com" placeholderTextColor="#1A1A1A" keyboardType="email-address" />
+          <View style={styles.inputRow}>
+            <TextInput style={[styles.input, { flex: 1, borderBottomWidth: 0 }]} placeholder="imshuvo97@gmail.com" placeholderTextColor="#1A1A1A" keyboardType="email-address" />
+            <Ionicons name="checkmark" size={24} color="#53B175" />
+          </View>
         </View>
 
         <View style={styles.inputContainer}>
@@ -39,7 +44,6 @@ export default function SignUpScreen({ navigation }) {
           </View>
         </View>
 
-        {/* Đoạn text Điều khoản */}
         <View style={styles.termsContainer}>
           <Text style={styles.termsText}>By continuing you agree to our </Text>
           <Text style={styles.termsLink}>Terms of Service</Text>
@@ -47,12 +51,10 @@ export default function SignUpScreen({ navigation }) {
           <Text style={styles.termsLink}>Privacy Policy.</Text>
         </View>
 
-        {/* Nút "Sing Up" màu xanh lá */}
         <TouchableOpacity style={styles.signupBtn}>
           <Text style={styles.signupBtnText}>Sing Up</Text>
         </TouchableOpacity>
 
-        {/* Chữ "Singin" ở cuối */}
         <View style={styles.loginRow}>
           <Text style={styles.loginText}>Already have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFF' },
   content: { paddingHorizontal: 25, paddingTop: 30 },
   logoContainer: { alignItems: 'center', marginBottom: 50 },
-  logo: { width: 50, height: 50 },
+  logo: { width: 55, height: 55 },
   title: { fontSize: 26, fontWeight: 'bold', color: '#1A1A1A', marginBottom: 10 },
   subtitle: { fontSize: 16, color: '#7C7C7C', marginBottom: 40 },
   inputContainer: { marginBottom: 30 },
