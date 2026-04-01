@@ -6,7 +6,7 @@ import { FontAwesome } from '@expo/vector-icons';
 export default function SignInScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      <Image source={require('../../assets/anh2.jpg')} style={styles.image} resizeMode="cover" />
+      <Image source={require('../assets/anh2.jpg')} style={styles.image} resizeMode="cover" />
       
       <View style={styles.content}>
         <Text style={styles.title}>Get your groceries{'\n'}with nectar</Text>

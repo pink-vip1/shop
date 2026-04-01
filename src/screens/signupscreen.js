@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native'; // Đã xóa Image
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+// Thêm FontAwesome5 vào dòng import để sử dụng icon củ cà rốt
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons'; 
 
 export default function SignUpScreen({ navigation }) {
   const [secureText, setSecureText] = useState(true);
@@ -10,26 +11,38 @@ export default function SignUpScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         
+        {/* --- KHỐI LOGO --- */}
         <View style={styles.logoContainer}>
-            <Image 
-          source={require('../../assets/crot.png') } 
-          style={styles.carrot} 
-           
-        />  
+          {/* SỬA ĐỔI: Thay Image bằng Icon FontAwesome5 củ cà rốt màu cam */}
+          <FontAwesome5 
+            name="carrot" 
+            size={55}          // Kích thước tương đương ảnh cũ
+            color="#F3603F"   // Màu cam của cà rốt
+          />
         </View>
 
-        <Text style={styles.title}>Sing up</Text>
+        {/* Sửa typo: Sing up -> Sign up */}
+        <Text style={styles.title}>Sign up</Text>
         <Text style={styles.subtitle}>Enter your credentials to continue</Text>
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Username</Text>
-          <TextInput style={styles.input} placeholder="Afsar Hossen Shuvo" placeholderTextColor="#1A1A1A" />
+          <TextInput 
+            style={styles.input} 
+            placeholder="Afsar Hossen Shuvo" 
+            placeholderTextColor="#1A1A1A" 
+          />
         </View>
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Email</Text>
           <View style={styles.inputRow}>
-            <TextInput style={[styles.input, { flex: 1, borderBottomWidth: 0 }]} placeholder="imshuvo97@gmail.com" placeholderTextColor="#1A1A1A" keyboardType="email-address" />
+            <TextInput 
+              style={[styles.input, { flex: 1, borderBottomWidth: 0, paddingBottom: 0 }]} 
+              placeholder="imshuvo97@gmail.com" 
+              placeholderTextColor="#1A1A1A" 
+              keyboardType="email-address" 
+            />
             <Ionicons name="checkmark" size={24} color="#53B175" />
           </View>
         </View>
@@ -37,9 +50,18 @@ export default function SignUpScreen({ navigation }) {
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Password</Text>
           <View style={styles.inputRow}>
-            <TextInput style={[styles.input, { flex: 1, borderBottomWidth: 0 }]} placeholder="********" placeholderTextColor="#1A1A1A" secureTextEntry={secureText} />
+            <TextInput 
+              style={[styles.input, { flex: 1, borderBottomWidth: 0, paddingBottom: 0 }]} 
+              placeholder="********" 
+              placeholderTextColor="#1A1A1A" 
+              secureTextEntry={secureText} 
+            />
             <TouchableOpacity onPress={() => setSecureText(!secureText)}>
-              <Ionicons name={secureText ? "eye-off-outline" : "eye-outline"} size={20} color="#7C7C7C" />
+              <Ionicons 
+                name={secureText ? "eye-off-outline" : "eye-outline"} 
+                size={20} 
+                color="#7C7C7C" 
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -52,13 +74,15 @@ export default function SignUpScreen({ navigation }) {
         </View>
 
         <TouchableOpacity style={styles.signupBtn}>
-          <Text style={styles.signupBtnText}>Sing Up</Text>
+          {/* Sửa typo: Sing Up -> Sign Up */}
+          <Text style={styles.signupBtnText}>Sign Up</Text>
         </TouchableOpacity>
 
         <View style={styles.loginRow}>
           <Text style={styles.loginText}>Already have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.loginLink}>Singin</Text>
+            {/* Sửa typo: Singin -> Sign in */}
+            <Text style={styles.loginLink}>Sign in</Text>
           </TouchableOpacity>
         </View>
 
@@ -69,9 +93,9 @@ export default function SignUpScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFF' },
-  content: { paddingHorizontal: 25, paddingTop: 30 },
+  content: { paddingHorizontal: 25, paddingTop: 30, paddingBottom: 30 },
   logoContainer: { alignItems: 'center', marginBottom: 50 },
-  logo: { width: 55, height: 55 },
+  // Đã xóa styles.logo vì size của icon được quản lý ở prop trực tiếp
   title: { fontSize: 26, fontWeight: 'bold', color: '#1A1A1A', marginBottom: 10 },
   subtitle: { fontSize: 16, color: '#7C7C7C', marginBottom: 40 },
   inputContainer: { marginBottom: 30 },

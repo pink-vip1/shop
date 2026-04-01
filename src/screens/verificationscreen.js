@@ -30,7 +30,7 @@ export default function VerificationScreen({ navigation }) {
 
           <TouchableOpacity 
             style={styles.fab}
-            onPress={() => navigation.navigate('SelectLocation')}
+            onPress={() => navigation.navigate('Location')}
           >
             <Ionicons name="chevron-forward" size={28} color="#FFF" />
           </TouchableOpacity>

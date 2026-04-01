@@ -1,38 +1,50 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-// Import 2 màn hình đầu tiên (Onboarding và Sign In)
+// Import luồng Khởi động & Xác thực
 import WelcomeScreen from '../screens/welcomescreen';
 import SignInScreen from '../screens/signinscreen';
-import HomeScreen from '../screens/homescreen';
-
-// Import 5 màn hình tiếp theo
 import NumberScreen from '../screens/numberscreen';
 import VerificationScreen from '../screens/verificationscreen';
-import SelectLocationScreen from '../screens/locationscreen';
+import LocationScreen from '../screens/locationscreen';
 import LoginScreen from '../screens/loginscreen';
-import SignUpScreen from '../screens/signupscreen';
+import SignUpScreen from '../screens/signupscreen'; // Luồng đăng ký phụ
+
+// Import Main App & Các màn hình chi tiết
+import BottomTabNavigator from './bottomtabnavigator';
+import ProductDetailScreen from '../screens/productdetailscreen';
+import BeveragesScreen from '../screens/beveragesscreen';
+import FilterScreen from '../screens/filterscreen';
 
 const Stack = createStackNavigator();
 
 export default function AppNavigator() {
   return (
-    <Stack.Navigator 
-      // initialRouteName quy định màn hình nào sẽ hiện lên đầu tiên khi mở App
-      initialRouteName="Welcome" 
-      screenOptions={{ headerShown: false }} // Ẩn thanh tiêu đề mặc định của Expo
-    >
-      {/* 2 màn hình đầu */}
-      <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      <Stack.Screen name="SignIn" component={SignInScreen} />
-      
-      {/* 5 màn hình sau */}
-      <Stack.Screen name="Number" component={numberscreen} />
-      <Stack.Screen name="Verification" component={verificationscreen} />
-      <Stack.Screen name="SelectLocation" component={locationscreen} />
-      <Stack.Screen name="Login" component={loginscreen} />
-      <Stack.Screen name="SignUp" component={signupscreen} />
-      <Stack.Screen name="Home" component={homescreen} />
-    </Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Welcome">
+        
+        {/* --- LUỒNG XÁC THỰC CHÍNH --- */}
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen name="Number" component={NumberScreen} />
+        <Stack.Screen name="Verification" component={VerificationScreen} />
+        <Stack.Screen name="Location" component={LocationScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+
+        {/* --- LUỒNG ĐĂNG KÝ PHỤ --- */}
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+
+        {/* --- APP CHÍNH (Sau khi Login thành công) --- */}
+        {/* MainApp chính là thanh Tab chứa Home, Explore, Cart... */}
+        <Stack.Screen name="MainApp" component={BottomTabNavigator} />
+
+        {/* --- CÁC MÀN HÌNH CHI TIẾT SẢN PHẨM --- */}
+        <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+        <Stack.Screen name="Beverages" component={BeveragesScreen} />
+        <Stack.Screen name="Filter" component={FilterScreen} options={{ presentation: 'modal' }} />
+        
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

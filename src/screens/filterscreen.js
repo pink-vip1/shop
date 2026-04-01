@@ -3,10 +3,20 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-nati
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
+// Khai báo lại dữ liệu gốc ở đây để tiến hành lọc
+const beveragesData = [
+  { id: '1', name: 'Diet Coke', desc: '355ml, Price', price: '$1.99', image: require('../assets/anh7.png') },
+  { id: '2', name: 'Sprite Can', desc: '325ml, Price', price: '$1.50', image: require('../assets/anh8.png') },
+  { id: '3', name: 'Apple & Grape\nJuice', desc: '2L, Price', price: '$15.99', image: require('../assets/anh9.png') },
+  { id: '4', name: 'Orenge Juice', desc: '2L, Price', price: '$15.99', image: require('../assets/anh10.png') },
+  { id: '5', name: 'Coca Cola Can', desc: '325ml, Price', price: '$4.99', image: require('../assets/anh11.png') },
+  { id: '6', name: 'Pepsi Can', desc: '330ml, Price', price: '$4.99', image: require('../assets/anh12.png') },
+];
+
 export default function FilterScreen({ navigation }) {
-  // State quản lý các mục đang được chọn (chọn nhiều)
-  const [selectedCategories, setSelectedCategories] = useState(['Eggs', 'Noodles & Pasta']);
-  const [selectedBrands, setSelectedBrands] = useState(['Individual Collection']);
+  // State quản lý các mục đang được chọn (mặc định để trống để hiện tất cả)
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
 
   // Hàm mô phỏng checkbox
   const toggleCategory = (item) => {
@@ -16,6 +26,36 @@ export default function FilterScreen({ navigation }) {
     setSelectedBrands(prev => prev.includes(item) ? prev.filter(i => i !== item) : [...prev, item]);
   };
 
+  // Logic xử lý khi bấm nút Apply Filter
+  const applyFilters = () => {
+    let result = beveragesData;
+
+    // 1. Lọc theo Category (Thể loại)
+    if (selectedCategories.length > 0) {
+      result = result.filter(item => {
+        const isJuice = item.name.toLowerCase().includes('juice');
+        if (selectedCategories.includes('Juices') && isJuice) return true;
+        if (selectedCategories.includes('Sodas & Cans') && !isJuice) return true;
+        return false;
+      });
+    }
+
+    // 2. Lọc theo Brand (Thương hiệu)
+    if (selectedBrands.length > 0) {
+      result = result.filter(item => {
+        if (selectedBrands.includes('Coca Cola') && (item.name.includes('Coke') || item.name.includes('Cola') || item.name.includes('Sprite'))) return true;
+        if (selectedBrands.includes('Pepsi') && item.name.includes('Pepsi')) return true;
+        if (selectedBrands.includes('Naturel') && item.name.toLowerCase().includes('juice')) return true;
+        return false;
+      });
+    }
+
+    // Điều hướng ngược lại màn hình Beverages và truyền mảng result đã lọc
+    // Chú ý: tên màn hình 'Beverages' phải khớp với tên khai báo trong AppNavigator
+    navigation.navigate('Beverages', { filteredData: result });
+  };
+
+  // Component giao diện cho 1 hàng Checkbox
   const CheckboxItem = ({ label, isSelected, onPress }) => (
     <TouchableOpacity style={styles.checkboxRow} onPress={onPress}>
       <View style={[styles.checkbox, isSelected && styles.checkboxSelected]}>
@@ -39,7 +79,7 @@ export default function FilterScreen({ navigation }) {
       <ScrollView contentContainerStyle={styles.content}>
         {/* Section: Categories */}
         <Text style={styles.sectionTitle}>Categories</Text>
-        {['Eggs', 'Noodles & Pasta', 'Chips & Crisps', 'Fast Food'].map(item => (
+        {['Sodas & Cans', 'Juices', 'Water', 'Energy Drinks'].map(item => (
           <CheckboxItem 
             key={item} 
             label={item} 
@@ -50,7 +90,7 @@ export default function FilterScreen({ navigation }) {
 
         {/* Section: Brand */}
         <Text style={styles.sectionTitle}>Brand</Text>
-        {['Individual Collection', 'Cocacola', 'Ifad', 'Kazi Farmas'].map(item => (
+        {['Coca Cola', 'Pepsi', 'Naturel', 'Red Bull'].map(item => (
           <CheckboxItem 
             key={item} 
             label={item} 
@@ -62,7 +102,7 @@ export default function FilterScreen({ navigation }) {
 
       {/* Nút Apply */}
       <View style={styles.bottomBar}>
-        <TouchableOpacity style={styles.applyBtn} onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={styles.applyBtn} onPress={applyFilters}>
           <Text style={styles.applyText}>Apply Filter</Text>
         </TouchableOpacity>
       </View>

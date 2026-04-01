@@ -1,19 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'; // Đã xóa Image
+import { FontAwesome5 } from '@expo/vector-icons'; // Thêm import FontAwesome5
 
 export default function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground 
-      source={require('../../assets/anh1.jpg')} 
+      source={require('../assets/anh1.jpg')} 
       style={styles.background}
       resizeMode="cover"
     >
       <View style={styles.overlay}>
-        
-        <Image 
-          source={require('../../assets/crot.png') } 
-          style={styles.carrot} 
-        />  
+        {/* Thay thế thẻ Image bằng Icon FontAwesome5 */}
+        <FontAwesome5 name="carrot" size={48} color="#d96a10" style={styles.carrotIcon} />  
         
         <Text style={styles.title}>Welcome</Text>
         <Text style={styles.title}>to our store</Text>
@@ -21,7 +19,8 @@ export default function WelcomeScreen({ navigation }) {
 
         <TouchableOpacity 
           style={styles.button}
-          onPress={() => navigation.navigate('SignIn')} 
+          // ĐÃ FIX: Chuyển sang 'Login' thay vì 'SignIn'
+          onPress={() => navigation.navigate('SignIn')}
         >
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
@@ -31,28 +30,24 @@ export default function WelcomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  background: { 
-    flex: 1 
-  },
+  background: { flex: 1 },
   overlay: { 
     flex: 1, 
-    backgroundColor: 'rgba(0,0,0,0.4)', // Phủ lớp đen mờ 40%
+    backgroundColor: 'rgba(0,0,0,0.4)', 
     justifyContent: 'flex-end', 
-    alignItems: 'center',
+    alignItems: 'center', 
     paddingHorizontal: 30, 
     paddingBottom: 60 
   },
-  carrot: { 
-    width: 48, 
-    height: 48, 
-    marginBottom: 15, 
-    tintColor: '#FFF' // Ép icon thành màu trắng tinh
+  // Đổi tên style thành carrotIcon và chỉ giữ lại marginBottom (size và màu đã được quản lý ở prop)
+  carrotIcon: { 
+    marginBottom: 15 
   },
   title: { 
     fontSize: 42, 
     fontWeight: 'bold', 
     color: '#FFF', 
-    textAlign: 'center',
+    textAlign: 'center', 
     lineHeight: 48 
   },
   subtitle: { 
