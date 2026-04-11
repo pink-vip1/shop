@@ -174,7 +174,7 @@ export default function CartScreen({ navigation }) {
                 <Text style={styles.statusTitle}>Oops! Order Failed</Text>
                 <Text style={styles.statusMessage}>Something went terribly wrong.</Text>
                 
-                <TouchableOpacity style={styles.errorBtn} onPress={() => setPaymentStatus(null)}>
+                <TouchableOpacity style={styles.errorBtn} onPress={() => { setPaymentStatus(null); navigation.navigate('Cart'); }}>
                   <Text style={styles.btnTextWhite}>Please Try Again</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.backHomeBtn} onPress={() => { setPaymentStatus(null); navigation.navigate('Shop'); }}>
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
   statusTitle: { fontSize: 24, fontWeight: 'bold', color: '#181725', textAlign: 'center', marginBottom: 15 },
   statusMessage: { fontSize: 16, color: '#7C7C7C', textAlign: 'center', marginBottom: 30, lineHeight: 22 },
   successBtn: { backgroundColor: '#53B175', width: '100%', paddingVertical: 18, borderRadius: 19, alignItems: 'center', marginBottom: 15 },
-  errorBtn: { backgroundColor: '#181725', width: '100%', paddingVertical: 18, borderRadius: 19, alignItems: 'center', marginBottom: 15 },
+  errorBtn: { backgroundColor: '#008b25', width: '100%', paddingVertical: 18, borderRadius: 19, alignItems: 'center', marginBottom: 15 },
   backHomeBtn: { paddingVertical: 15, width: '100%', alignItems: 'center' },
   btnTextWhite: { color: '#FFF', fontSize: 18, fontWeight: 'bold' },
   btnTextBlack: { color: '#181725', fontSize: 18, fontWeight: 'bold' }
